@@ -1,0 +1,29 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local function tripleSlaps()
+    local character = LocalPlayer.Character
+    if not character then return end
+    
+    local humanoid = character:FindFirstChild("Humanoid")
+    if not humanoid then return end
+    
+    -- Função para aumentar o número de tapas
+    local function increaseSlaps()
+        -- Aqui você precisaria acessar a variável ou objeto que controla o número de tapas
+        -- Este é um exemplo genérico e pode precisar ser ajustado com base na estrutura real do jogo
+        if character:FindFirstChild("Slaps") then
+            local currentSlaps = character.Slaps.Value
+            character.Slaps.Value = currentSlaps * 3
+        end
+    end
+    
+    -- Conectar a função a eventos relevantes (por exemplo, quando o jogador dá um tapa)
+    humanoid.Touched:Connect(function(hit)
+        if hit.Parent:FindFirstChild("Humanoid") then
+            increaseSlaps()
+        end
+    end)
+end
+
+tripleSlaps()
